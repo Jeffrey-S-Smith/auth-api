@@ -24,6 +24,15 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(logger);
+
+app.get('/', (req, res)=>{ 
+  
+  try{
+    res.status(200).send('life');
+  }catch(e){
+    console(e);
+  }});
+
 app.use('/api/v1', v1Routes);
 app.use('/api/v2',bearer, v1Routes);
 
