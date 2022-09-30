@@ -7,8 +7,18 @@ const userModel = require('./users.js');
 
 const DATABASE_URL = process.env.DATABASE_URL || 'sqlite:memory:';
 
-const sequelize = new Sequelize(DATABASE_URL);
+let herokuOptions = {
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+};
+
+const sequelize = new Sequelize(DATABASE_URL, herokuOptions);
 const reservations = reservationModel(sequelize, DataTypes);
+
 
 
 
